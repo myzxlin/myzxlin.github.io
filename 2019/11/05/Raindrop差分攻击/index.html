@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="Raindrop概述Raindrop是中国密码算法设计竞赛的分组密码候选者之一，由CACR协会赞助。
+将128位的明文从右到左编号为0-127，64-127位为左枝，0-63位为右枝。每个分枝可表示为一个4x4维的状态矩阵，按如下规则映射：|Pi|表示Pi的长度，当i为偶数时 |Pi| = 3，i为"/>
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Xiaolin"/>
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Raindrop差分攻击"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="Raindrop概述Raindrop是中国密码算法设计竞赛的分组密码候选者之一，由CACR协会赞助。
+将128位的明文从右到左编号为0-127，64-127位为左枝，0-63位为右枝。每个分枝可表示为一个4x4维的状态矩阵，按如下规则映射：|Pi|表示Pi的长度，当i为偶数时 |Pi| = 3，i为"/>
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="张晓琳"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article"/>
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="myzxlin.github.io/img/home.jpg"/>
+    
+
+        <meta name="twitter:card" content="summary_large_image"/>
+
+    
+
+    
+        <meta name="twitter:image" content="myzxlin.github.io/img/home.jpg"/>
+    
+
+    <!-- Title -->
+    
+    <title>Raindrop差分攻击 - 张晓琳</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">再回首 却闻笑传醉梦中</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/myzxlin" target="_blank" rel="noopener">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Raindrop差分攻击</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2019-11-05
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/密码学/">#密码学</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h2 id="Raindrop概述"><a href="#Raindrop概述" class="headerlink" title="Raindrop概述"></a>Raindrop概述</h2><p>Raindrop是中国密码算法设计竞赛的分组密码候选者之一，由CACR协会赞助。</p>
+<p>将128位的明文从右到左编号为0-127，64-127位为左枝，0-63位为右枝。每个分枝可表示为一个4x4维的状态矩阵，按如下规则映射：<br>|Pi|表示Pi的长度，当i为偶数时 |Pi| = 3，i为奇数时 |Pi| = 5。</p>
+<div align=center><img src="/img/article/raindrop-1.png" style="zoom:50%"></div>
+
+<p>轮函数 RF64 通过 <code>S-box, MixRow, BitRot</code> 这三个操作更新状态矩阵。</p>
+<div align=center><img src="/img/article/raindrop-2.png" style="zoom:50%"></div>
+
+<p><code>S-box</code><br>S盒由 Keccak’s S-boxes 设计而来, 分别是 3-bit 和 5-bit S盒。</p>
+<div align=center><img src="/img/article/raindrop-3.png" style="zoom:50%"></div> 
+
+<p><code>MixRow</code><br>按以下图示对矩阵进行操作。</p>
+<div align=center><img src="/img/article/raindrop-4.png" style="zoom:50%"></div> 
+
+<p><code>BitRot</code><br>对于状态矩阵第i列，计算一个级联值 Coli = P4i || P4i+1 || P4i+2 || P4i+3, 对 Coli 进行循环移位操作：Col0 不变，Col1 左移 6 位，Col2 左移 7 位，Col3 左移 12 位。</p>
+<h2 id="针对Raindrop的差分攻击"><a href="#针对Raindrop的差分攻击" class="headerlink" title="针对Raindrop的差分攻击"></a>针对Raindrop的差分攻击</h2><p>这里介绍了如何找到了一个有效的差分攻击算子 𝛼→𝛽 的方法。</p>
+<ol>
+<li>首先，计算并绘制差分表：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Raindrop Differential Attack</span></span><br><span class="line"><span class="comment"># Xiaolin Zhang, 2019-11-2 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># s-boxes</span></span><br><span class="line">s1 = &#123; <span class="number">0</span>: <span class="number">0</span>, <span class="number">1</span>: <span class="number">5</span>, <span class="number">2</span>: <span class="number">3</span>, <span class="number">3</span>: <span class="number">2</span>, <span class="number">4</span>: <span class="number">6</span>, <span class="number">5</span>: <span class="number">1</span>, <span class="number">6</span>: <span class="number">4</span>, <span class="number">7</span>: <span class="number">7</span>&#125;</span><br><span class="line">s2 = &#123; </span><br><span class="line">    <span class="number">0</span>:  <span class="number">0</span>,  <span class="number">1</span>:  <span class="number">5</span>,  <span class="number">2</span>: <span class="number">10</span>,  <span class="number">3</span>: <span class="number">11</span>,  <span class="number">4</span>: <span class="number">20</span>,  <span class="number">5</span>: <span class="number">17</span>,  <span class="number">6</span>: <span class="number">22</span>,  <span class="number">7</span>: <span class="number">23</span>,</span><br><span class="line">    <span class="number">8</span>:  <span class="number">9</span>,  <span class="number">9</span>: <span class="number">12</span>, <span class="number">10</span>:  <span class="number">3</span>, <span class="number">11</span>:  <span class="number">2</span>, <span class="number">12</span>: <span class="number">13</span>, <span class="number">13</span>:  <span class="number">8</span>, <span class="number">14</span>: <span class="number">15</span>, <span class="number">15</span>: <span class="number">14</span>, </span><br><span class="line">    <span class="number">16</span>: <span class="number">18</span>, <span class="number">17</span>: <span class="number">21</span>, <span class="number">18</span>: <span class="number">24</span>, <span class="number">19</span>: <span class="number">27</span>, <span class="number">20</span>:  <span class="number">6</span>, <span class="number">21</span>:  <span class="number">1</span>, <span class="number">22</span>:  <span class="number">4</span>, <span class="number">23</span>:  <span class="number">7</span>,</span><br><span class="line">    <span class="number">24</span>: <span class="number">26</span>, <span class="number">25</span>: <span class="number">29</span>, <span class="number">26</span>: <span class="number">16</span>, <span class="number">27</span>: <span class="number">19</span>, <span class="number">28</span>: <span class="number">30</span>, <span class="number">29</span>: <span class="number">25</span>, <span class="number">30</span>: <span class="number">28</span>, <span class="number">31</span>: <span class="number">31</span></span><br><span class="line">&#125; </span><br><span class="line">dt3 = np.zeros((<span class="number">8</span>,<span class="number">8</span>))    <span class="comment"># 3 bits s-box differential table </span></span><br><span class="line">dt5 = np.zeros((<span class="number">32</span>,<span class="number">32</span>))  <span class="comment"># 5 bits s-box differential table</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># get differential table of s-box in f6</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getDt</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> s1, s2</span><br><span class="line">    dt3 = np.zeros((<span class="number">8</span>,<span class="number">8</span>))</span><br><span class="line">    dt5 = np.zeros((<span class="number">32</span>,<span class="number">32</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">8</span>): </span><br><span class="line">            dt3[i^j][s1[i]^s1[j]] += <span class="number">1</span> 			</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">32</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">32</span>): </span><br><span class="line">            dt5[i^j][s2[i]^s2[j]] += <span class="number">1</span> </span><br><span class="line">    <span class="comment"># draw heat map of dt3, dt5 to show them better</span></span><br><span class="line">    sns.set()               </span><br><span class="line">    f, ax = plt.subplots(figsize = (<span class="number">8</span>, <span class="number">8</span>))</span><br><span class="line">    sns.heatmap(dt3, annot=<span class="literal">True</span>, cmap=<span class="string">"OrRd"</span>)</span><br><span class="line">    plt.savefig(<span class="string">"dt3.png"</span>)</span><br><span class="line">    f, ax = plt.subplots(figsize = (<span class="number">8</span>, <span class="number">8</span>))</span><br><span class="line">    sns.heatmap(dt5, annot=<span class="literal">True</span>, cmap=<span class="string">"OrRd"</span>)</span><br><span class="line">    plt.savefig(<span class="string">"dt5.png"</span>) </span><br><span class="line">    <span class="keyword">return</span> dt3, dt5</span><br></pre></td></tr></table></figure>
+<div align=center><img src="/img/article/raindrop-dt3.png" style="zoom:60%" ></div> 
+<div align=center><img src="/img/article/raindrop-dt5.png" style="zoom:80%" ></div> 
+
+<ol start="2">
+<li>写出 MixRow, BitRot 函数，模拟加密过程，为攻击做准备</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># the first permutation function in rf64</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mixRow</span><span class="params">(matrix)</span>:</span></span><br><span class="line">    res = np.array([[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]])</span><br><span class="line">    res[<span class="number">0</span>][<span class="number">0</span>] = matrix[<span class="number">0</span>][<span class="number">1</span>]^matrix[<span class="number">0</span>][<span class="number">3</span>]</span><br><span class="line">    res[<span class="number">0</span>][<span class="number">1</span>] = matrix[<span class="number">0</span>][<span class="number">2</span>]^matrix[<span class="number">0</span>][<span class="number">3</span>]</span><br><span class="line">    res[<span class="number">0</span>][<span class="number">2</span>] = matrix[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">    res[<span class="number">0</span>][<span class="number">3</span>] = matrix[<span class="number">0</span>][<span class="number">0</span>]^matrix[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    res[<span class="number">1</span>][<span class="number">0</span>] = matrix[<span class="number">1</span>][<span class="number">1</span>]^matrix[<span class="number">1</span>][<span class="number">3</span>]</span><br><span class="line">    res[<span class="number">1</span>][<span class="number">1</span>] = matrix[<span class="number">1</span>][<span class="number">2</span>]^matrix[<span class="number">1</span>][<span class="number">3</span>]</span><br><span class="line">    res[<span class="number">1</span>][<span class="number">2</span>] = matrix[<span class="number">1</span>][<span class="number">0</span>]</span><br><span class="line">    res[<span class="number">1</span>][<span class="number">3</span>] = matrix[<span class="number">1</span>][<span class="number">0</span>]^matrix[<span class="number">1</span>][<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    res[<span class="number">2</span>][<span class="number">0</span>] = matrix[<span class="number">2</span>][<span class="number">1</span>]^matrix[<span class="number">2</span>][<span class="number">3</span>]</span><br><span class="line">    res[<span class="number">2</span>][<span class="number">1</span>] = matrix[<span class="number">2</span>][<span class="number">2</span>]^matrix[<span class="number">2</span>][<span class="number">3</span>]</span><br><span class="line">    res[<span class="number">2</span>][<span class="number">2</span>] = matrix[<span class="number">2</span>][<span class="number">0</span>]</span><br><span class="line">    res[<span class="number">2</span>][<span class="number">3</span>] = matrix[<span class="number">2</span>][<span class="number">0</span>]^matrix[<span class="number">2</span>][<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    res[<span class="number">3</span>][<span class="number">0</span>] = matrix[<span class="number">3</span>][<span class="number">1</span>]^matrix[<span class="number">3</span>][<span class="number">3</span>]</span><br><span class="line">    res[<span class="number">3</span>][<span class="number">1</span>] = matrix[<span class="number">3</span>][<span class="number">2</span>]^matrix[<span class="number">3</span>][<span class="number">3</span>]</span><br><span class="line">    res[<span class="number">3</span>][<span class="number">2</span>] = matrix[<span class="number">3</span>][<span class="number">0</span>]</span><br><span class="line">    res[<span class="number">3</span>][<span class="number">3</span>] = matrix[<span class="number">3</span>][<span class="number">0</span>]^matrix[<span class="number">3</span>][<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="comment"># the second permutation function in rf64, cyclically move bits</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bitRot</span><span class="params">(matrix)</span>:</span></span><br><span class="line">    bit = [<span class="number">0</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">12</span>]     </span><br><span class="line">    res = np.array([[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]])</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        col = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">            w = <span class="number">3</span> <span class="keyword">if</span> i%<span class="number">2</span>==<span class="number">0</span> <span class="keyword">else</span> <span class="number">5</span>   </span><br><span class="line">            arr = decimal2array(matrix[i][j], w)</span><br><span class="line">            col.extend(arr)                   <span class="comment"># concatenate the column</span></span><br><span class="line">        k = bit[j]</span><br><span class="line">        col2 = col[k:]+col[:k]                <span class="comment"># cyclically move bits</span></span><br><span class="line">        res[<span class="number">0</span>][j] = array2decimal(col2[<span class="number">0</span>:<span class="number">3</span>])  <span class="comment"># split the binary string into 4 parts</span></span><br><span class="line">        res[<span class="number">1</span>][j] = array2decimal(col2[<span class="number">3</span>:<span class="number">8</span>])</span><br><span class="line">        res[<span class="number">2</span>][j] = array2decimal(col2[<span class="number">8</span>:<span class="number">11</span>])</span><br><span class="line">        res[<span class="number">3</span>][j] = array2decimal(col2[<span class="number">11</span>:<span class="number">16</span>])</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="comment"># the 64-bit round function (containing s-box, mixRow, bitRot)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rf64</span><span class="params">(matrix)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> s1, s2</span><br><span class="line">    s = np.array([[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]])</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        k = matrix[i][j]</span><br><span class="line">            s[i][j] = s1[k] <span class="keyword">if</span> i%<span class="number">2</span>==<span class="number">0</span> <span class="keyword">else</span> s2[k]</span><br><span class="line">    <span class="keyword">return</span> bitRot(mixRow(s))</span><br></pre></td></tr></table></figure>
+<br/>
+3. findPath()函数可自动找到最佳攻击路径，同时计算概率
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">prob = <span class="number">0</span>   <span class="comment"># attack probability is 1/(2^prob), prob &lt; 128</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># automatically find the attacking path, calculate probability</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findPath</span><span class="params">(left, right, round)</span>:</span>	</span><br><span class="line">    <span class="keyword">global</span> dt3, dt5, prob</span><br><span class="line">    print(<span class="string">"+ + + + + + attackOneRound + + + + + +"</span>)</span><br><span class="line">    print(left)</span><br><span class="line">    print(right)</span><br><span class="line">    temp = left</span><br><span class="line">    <span class="comment"># only left matric need to cross the s-box</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):     </span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">            <span class="keyword">if</span> temp[i][j]!=<span class="number">0</span>:</span><br><span class="line">                <span class="keyword">if</span> i%<span class="number">2</span>==<span class="number">0</span>:</span><br><span class="line">                    <span class="comment"># target is the output of s-box</span></span><br><span class="line">                    target = findTarget(dt3, temp[i][j])</span><br><span class="line">                    <span class="comment"># accumulate the probability			</span></span><br><span class="line">                    prob += math.log(<span class="number">8</span>/dt3[temp[i][j]][target], <span class="number">2</span>) </span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    target = findTarget(dt5, temp[i][j])	</span><br><span class="line">                     prob += math.log(<span class="number">32</span>/dt5[temp[i][j]][target], <span class="number">2</span>) </span><br><span class="line">                temp[i][j] = target     <span class="comment"># update status matrix</span></span><br><span class="line"></span><br><span class="line">    temp = bitRot(mixRow(temp))        </span><br><span class="line">    xor = np.array([[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]])</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">            xor[i][j] = temp[i][j]^right[i][j]</span><br><span class="line">    print(<span class="string">"round"</span>, round+<span class="number">1</span>)</span><br><span class="line">    print(<span class="string">"probability"</span>, prob)</span><br><span class="line">    <span class="keyword">if</span> prob &gt; <span class="number">128</span>:               <span class="comment"># attack over</span></span><br><span class="line">        <span class="keyword">return</span>	</span><br><span class="line">    findPath(xor, left, round+<span class="number">1</span>) <span class="comment"># find the next round path</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># find the target output with highest probability in differential table</span></span><br><span class="line"><span class="comment"># in raindrop case, the first non-zero value in a row is suitable</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findTarget</span><span class="params">(table, row)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> col <span class="keyword">in</span> range(len(table)):</span><br><span class="line">        <span class="keyword">if</span> table[row][col]!=<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> col</span><br><span class="line"></span><br><span class="line"><span class="comment"># convert decimal to binary array, k is the target length</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decimal2array</span><span class="params">(val, k)</span>:</span></span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">while</span> val!=<span class="number">0</span>: </span><br><span class="line">        res.append(val%<span class="number">2</span>) </span><br><span class="line">        val = int(val/<span class="number">2</span>) 	</span><br><span class="line">    res = res[::<span class="number">-1</span>]     <span class="comment"># reverse list</span></span><br><span class="line">    res2 = []</span><br><span class="line">    <span class="keyword">if</span> len(res)&lt;k:      <span class="comment"># padding with zero</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(k-len(res)): </span><br><span class="line">            res2.append(<span class="number">0</span>)</span><br><span class="line">    res2.extend(res)</span><br><span class="line">    <span class="keyword">return</span> res2</span><br><span class="line"></span><br><span class="line"><span class="comment"># convert binary array to decimal</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">array2decimal</span><span class="params">(arr)</span>:</span></span><br><span class="line">    res = <span class="number">0</span></span><br><span class="line">    arr2 = arr[::<span class="number">-1</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(arr)):</span><br><span class="line">        <span class="keyword">if</span> (arr2[i]==<span class="number">1</span>):</span><br><span class="line">            res += pow(<span class="number">2</span>,i)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</span><br><span class="line">    dt3, dt5 = getDt()  </span><br><span class="line">    <span class="comment"># randomly choose a start status</span></span><br><span class="line">    <span class="comment"># the more zero, the greater the probability </span></span><br><span class="line">    left = np.array([     </span><br><span class="line">        [ <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">        [ <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">        [ <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">        [ <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    ])</span><br><span class="line">    right = np.array([</span><br><span class="line">        [ <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">        [ <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">        [ <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">        [ <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    ])</span><br><span class="line">	findPath(left, right, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/myzxlin" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="mailto:myzxlin@163.com" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2020 Xiaolin<br></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
