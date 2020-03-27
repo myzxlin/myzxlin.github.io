@@ -20,7 +20,7 @@ Go实现这里用的是 P256 曲线与 SHA256 哈希函数，Generate"/>
 
     <!--Author-->
     
-        <meta name="author" content="Xiaolin"/>
+        <meta name="author" content="myzxlin"/>
     
 
     <!--Open Graph Title-->
@@ -118,7 +118,7 @@ Go实现这里用的是 P256 曲线与 SHA256 哈希函数，Generate"/>
                     <li>
                         <a href="/">
                             
-                                Home
+                                主页
                             
                         </a>
                     </li>
@@ -126,7 +126,7 @@ Go实现这里用的是 P256 曲线与 SHA256 哈希函数，Generate"/>
                     <li>
                         <a href="/archives">
                             
-                                Archives
+                                日志
                             
                         </a>
                     </li>
@@ -134,23 +134,7 @@ Go实现这里用的是 P256 曲线与 SHA256 哈希函数，Generate"/>
                     <li>
                         <a href="/tags">
                             
-                                Tags
-                            
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a href="/categories">
-                            
-                                Categories
-                            
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a href="https://github.com/myzxlin" target="_blank" rel="noopener">
-                            
-                                <i class="fa fa-github fa-stack-2x"></i>
+                                标签
                             
                         </a>
                     </li>
@@ -218,7 +202,7 @@ Go实现这里用的是 P256 曲线与 SHA256 哈希函数，Generate"/>
 <h2 id="Go实现"><a href="#Go实现" class="headerlink" title="Go实现"></a>Go实现</h2><p>这里用的是 P256 曲线与 SHA256 哈希函数，GenerateKey()方法参考了ECDSA。 </p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Schnorr Signature in Golang </span></span><br><span class="line"><span class="comment"> * Xiaolin Zhang, 2020-03-26</span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"><span class="keyword">package</span> schnorr</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"crypto/elliptic"</span></span><br><span class="line">    <span class="string">"crypto/rand"</span></span><br><span class="line">    <span class="string">"crypto/sha256"</span></span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"io"</span></span><br><span class="line">    <span class="string">"math/big"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> PublicKey <span class="keyword">struct</span> &#123;</span><br><span class="line">    elliptic.Curve</span><br><span class="line">    X, Y *big.Int</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> PrivateKey <span class="keyword">struct</span> &#123;</span><br><span class="line">    PublicKey</span><br><span class="line">    D *big.Int</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">type</span> Signature <span class="keyword">struct</span> &#123;</span><br><span class="line">    t PublicKey <span class="comment">// t is a point</span></span><br><span class="line">    z *big.Int</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span> <span class="params">()</span></span> &#123;</span><br><span class="line">    msg := <span class="string">"You know nothing, Jon Snow"</span></span><br><span class="line">    sk,_ := GenerateKey(elliptic.P256(),rand.Reader)</span><br><span class="line"></span><br><span class="line">    sig,_ := Sign(rand.Reader,sk,[]<span class="keyword">byte</span>(msg))</span><br><span class="line">    result := Verify(sig, sk.PublicKey, []<span class="keyword">byte</span>(msg))</span><br><span class="line">	</span><br><span class="line">    fmt.Println(<span class="string">"     Secret Key: "</span>, sk.D)</span><br><span class="line">    fmt.Println(<span class="string">"Signing Message: "</span>, msg)</span><br><span class="line">    fmt.Println(<span class="string">" Signing Result: "</span>, result) </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GenerateKey</span><span class="params">(c elliptic.Curve, rand io.Reader)</span> <span class="params">(*PrivateKey, error)</span></span> &#123;</span><br><span class="line">    k, err := randFieldElement(c, rand)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">    &#125;</span><br><span class="line">    priv := <span class="built_in">new</span>(PrivateKey)</span><br><span class="line">    priv.PublicKey.Curve = c</span><br><span class="line">    priv.D = k</span><br><span class="line">    priv.PublicKey.X, priv.PublicKey.Y = c.ScalarBaseMult(k.Bytes())</span><br><span class="line">    <span class="keyword">return</span> priv, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// returns a random element of the field underlying the given</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">randFieldElement</span><span class="params">(c elliptic.Curve, rand io.Reader)</span> <span class="params">(k *big.Int, err error)</span></span> &#123;</span><br><span class="line">    params := c.Params()</span><br><span class="line">    b := <span class="built_in">make</span>([]<span class="keyword">byte</span>, params.BitSize/<span class="number">8</span>+<span class="number">8</span>)</span><br><span class="line">    _, err = io.ReadFull(rand, b)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    one := <span class="built_in">new</span>(big.Int).SetInt64(<span class="number">1</span>)</span><br><span class="line">    k = <span class="built_in">new</span>(big.Int).SetBytes(b)</span><br><span class="line">    n := <span class="built_in">new</span>(big.Int).Sub(params.N, one)</span><br><span class="line">    k.Mod(k, n)</span><br><span class="line">    k.Add(k, one)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Sign</span><span class="params">(rand io.Reader, priv *PrivateKey, msg []<span class="keyword">byte</span>)</span> <span class="params">(sig Signature, err error)</span></span> &#123;</span><br><span class="line">    c := priv.PublicKey.Curve</span><br><span class="line">    a,_ := GenerateKey(c,rand)</span><br><span class="line">    sig.t = a.PublicKey</span><br><span class="line">    <span class="comment">// c = Hash(msg||t)</span></span><br><span class="line">    concatMsg := <span class="built_in">append</span>(msg, sig.t.X.Bytes()...)</span><br><span class="line">    hash := sha256.Sum256(concatMsg)</span><br><span class="line">    hashInt := <span class="built_in">new</span>(big.Int).SetBytes(hash[:])</span><br><span class="line">    <span class="comment">// z = a+sk*c</span></span><br><span class="line">    z := hashInt.Mul(priv.D, hashInt)</span><br><span class="line">    sig.z = z.Add(a.D,z)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Verify</span><span class="params">(sig Signature1, pk PublicKey, msg []<span class="keyword">byte</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    c := pk.Curve</span><br><span class="line">    <span class="comment">// c = Hash(msg||t)</span></span><br><span class="line">    concatMsg := <span class="built_in">append</span>(msg, sig.t.X.Bytes()...)</span><br><span class="line">    hash := sha256.Sum256(concatMsg)</span><br><span class="line">    <span class="comment">// z*G = t+c*pk</span></span><br><span class="line">    left,_:= c.ScalarBaseMult(sig.z.Bytes())</span><br><span class="line">    ux,uy := c.ScalarMult(pk.X, pk.Y, hash[:])</span><br><span class="line">    right,_ := c.Add(sig.t.X,sig.t.Y,ux,uy)</span><br><span class="line">    <span class="comment">// 0:equal, 1:&gt;, -1:&lt;1</span></span><br><span class="line">    <span class="keyword">if</span> left.Cmp(right)==<span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Accepted"</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Denied"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/img/article/schnorr.png" alt="签名结果"> </p>
+<p><img src="https://pic.downk.cc/item/5e7dfbe1504f4bcb048515de.jpg" alt="签名结果"> </p>
 
 
                 
@@ -275,7 +259,7 @@ Go实现这里用的是 P256 曲线与 SHA256 哈希函数，Generate"/>
 
                     
                 </ul>
-                <p class="copyright text-muted">&copy; 2020 Xiaolin<br></p>
+                <p class="copyright text-muted">&copy; 2020 myzxlin<br></p>
             </div>
         </div>
     </div>

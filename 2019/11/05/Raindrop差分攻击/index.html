@@ -19,7 +19,7 @@
 
     <!--Author-->
     
-        <meta name="author" content="Xiaolin"/>
+        <meta name="author" content="myzxlin"/>
     
 
     <!--Open Graph Title-->
@@ -116,7 +116,7 @@
                     <li>
                         <a href="/">
                             
-                                Home
+                                主页
                             
                         </a>
                     </li>
@@ -124,7 +124,7 @@
                     <li>
                         <a href="/archives">
                             
-                                Archives
+                                日志
                             
                         </a>
                     </li>
@@ -132,23 +132,7 @@
                     <li>
                         <a href="/tags">
                             
-                                Tags
-                            
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a href="/categories">
-                            
-                                Categories
-                            
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a href="https://github.com/myzxlin" target="_blank" rel="noopener">
-                            
-                                <i class="fa fa-github fa-stack-2x"></i>
+                                标签
                             
                         </a>
                     </li>
@@ -213,16 +197,16 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <h2 id="Raindrop概述"><a href="#Raindrop概述" class="headerlink" title="Raindrop概述"></a>Raindrop概述</h2><p>Raindrop是中国密码算法设计竞赛的分组密码候选者之一，由CACR协会赞助。</p>
 <p>将128位的明文从右到左编号为0-127，64-127位为左枝，0-63位为右枝。每个分枝可表示为一个4x4维的状态矩阵，按如下规则映射：<br>|Pi|表示Pi的长度，当i为偶数时 |Pi| = 3，i为奇数时 |Pi| = 5。</p>
-<div align=center><img src="/img/article/raindrop-1.png" style="zoom:50%"></div>
+<div align=center><img src="https://pic.downk.cc/item/5e7dfb65504f4bcb0484ce33.jpg" style="width:25%"></div>
 
 <p>轮函数 RF64 通过 <code>S-box, MixRow, BitRot</code> 这三个操作更新状态矩阵。</p>
-<div align=center><img src="/img/article/raindrop-2.png" style="zoom:50%"></div>
+<div align=center><img src="https://pic.downk.cc/item/5e7dfb65504f4bcb0484ce37.jpg" style="width:25%"></div>
 
 <p><code>S-box</code><br>S盒由 Keccak’s S-boxes 设计而来, 分别是 3-bit 和 5-bit S盒。</p>
-<div align=center><img src="/img/article/raindrop-3.png" style="zoom:50%"></div> 
+<div align=center><img src="https://pic.downk.cc/item/5e7dfb65504f4bcb0484ce3a.jpg" style="width:70%"></div> 
 
 <p><code>MixRow</code><br>按以下图示对矩阵进行操作。</p>
-<div align=center><img src="/img/article/raindrop-4.png" style="zoom:50%"></div> 
+<div align=center><img src="https://pic.downk.cc/item/5e7dfb65504f4bcb0484ce3c.jpg" style="width:70%"></div> 
 
 <p><code>BitRot</code><br>对于状态矩阵第i列，计算一个级联值 Coli = P4i || P4i+1 || P4i+2 || P4i+3, 对 Coli 进行循环移位操作：Col0 不变，Col1 左移 6 位，Col2 左移 7 位，Col3 左移 12 位。</p>
 <h2 id="针对Raindrop的差分攻击"><a href="#针对Raindrop的差分攻击" class="headerlink" title="针对Raindrop的差分攻击"></a>针对Raindrop的差分攻击</h2><p>这里介绍了如何找到了一个有效的差分攻击算子 𝛼→𝛽 的方法。</p>
@@ -230,8 +214,8 @@
 <li>首先，计算并绘制差分表：</li>
 </ol>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Raindrop Differential Attack</span></span><br><span class="line"><span class="comment"># Xiaolin Zhang, 2019-11-2 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># s-boxes</span></span><br><span class="line">s1 = &#123; <span class="number">0</span>: <span class="number">0</span>, <span class="number">1</span>: <span class="number">5</span>, <span class="number">2</span>: <span class="number">3</span>, <span class="number">3</span>: <span class="number">2</span>, <span class="number">4</span>: <span class="number">6</span>, <span class="number">5</span>: <span class="number">1</span>, <span class="number">6</span>: <span class="number">4</span>, <span class="number">7</span>: <span class="number">7</span>&#125;</span><br><span class="line">s2 = &#123; </span><br><span class="line">    <span class="number">0</span>:  <span class="number">0</span>,  <span class="number">1</span>:  <span class="number">5</span>,  <span class="number">2</span>: <span class="number">10</span>,  <span class="number">3</span>: <span class="number">11</span>,  <span class="number">4</span>: <span class="number">20</span>,  <span class="number">5</span>: <span class="number">17</span>,  <span class="number">6</span>: <span class="number">22</span>,  <span class="number">7</span>: <span class="number">23</span>,</span><br><span class="line">    <span class="number">8</span>:  <span class="number">9</span>,  <span class="number">9</span>: <span class="number">12</span>, <span class="number">10</span>:  <span class="number">3</span>, <span class="number">11</span>:  <span class="number">2</span>, <span class="number">12</span>: <span class="number">13</span>, <span class="number">13</span>:  <span class="number">8</span>, <span class="number">14</span>: <span class="number">15</span>, <span class="number">15</span>: <span class="number">14</span>, </span><br><span class="line">    <span class="number">16</span>: <span class="number">18</span>, <span class="number">17</span>: <span class="number">21</span>, <span class="number">18</span>: <span class="number">24</span>, <span class="number">19</span>: <span class="number">27</span>, <span class="number">20</span>:  <span class="number">6</span>, <span class="number">21</span>:  <span class="number">1</span>, <span class="number">22</span>:  <span class="number">4</span>, <span class="number">23</span>:  <span class="number">7</span>,</span><br><span class="line">    <span class="number">24</span>: <span class="number">26</span>, <span class="number">25</span>: <span class="number">29</span>, <span class="number">26</span>: <span class="number">16</span>, <span class="number">27</span>: <span class="number">19</span>, <span class="number">28</span>: <span class="number">30</span>, <span class="number">29</span>: <span class="number">25</span>, <span class="number">30</span>: <span class="number">28</span>, <span class="number">31</span>: <span class="number">31</span></span><br><span class="line">&#125; </span><br><span class="line">dt3 = np.zeros((<span class="number">8</span>,<span class="number">8</span>))    <span class="comment"># 3 bits s-box differential table </span></span><br><span class="line">dt5 = np.zeros((<span class="number">32</span>,<span class="number">32</span>))  <span class="comment"># 5 bits s-box differential table</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># get differential table of s-box in f6</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getDt</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> s1, s2</span><br><span class="line">    dt3 = np.zeros((<span class="number">8</span>,<span class="number">8</span>))</span><br><span class="line">    dt5 = np.zeros((<span class="number">32</span>,<span class="number">32</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">8</span>): </span><br><span class="line">            dt3[i^j][s1[i]^s1[j]] += <span class="number">1</span> 			</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">32</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">32</span>): </span><br><span class="line">            dt5[i^j][s2[i]^s2[j]] += <span class="number">1</span> </span><br><span class="line">    <span class="comment"># draw heat map of dt3, dt5 to show them better</span></span><br><span class="line">    sns.set()               </span><br><span class="line">    f, ax = plt.subplots(figsize = (<span class="number">8</span>, <span class="number">8</span>))</span><br><span class="line">    sns.heatmap(dt3, annot=<span class="literal">True</span>, cmap=<span class="string">"OrRd"</span>)</span><br><span class="line">    plt.savefig(<span class="string">"dt3.png"</span>)</span><br><span class="line">    f, ax = plt.subplots(figsize = (<span class="number">8</span>, <span class="number">8</span>))</span><br><span class="line">    sns.heatmap(dt5, annot=<span class="literal">True</span>, cmap=<span class="string">"OrRd"</span>)</span><br><span class="line">    plt.savefig(<span class="string">"dt5.png"</span>) </span><br><span class="line">    <span class="keyword">return</span> dt3, dt5</span><br></pre></td></tr></table></figure>
-<div align=center><img src="/img/article/raindrop-dt3.png" style="zoom:60%" ></div> 
-<div align=center><img src="/img/article/raindrop-dt5.png" style="zoom:80%" ></div> 
+<div align=center><img src="https://pic.downk.cc/item/5e7dfbe1504f4bcb048515d8.png" style="width:60%" ></div> 
+<div align=center><img src="https://pic.downk.cc/item/5e7dfbe1504f4bcb048515dc.png" style="width:80%" ></div> 
 
 <ol start="2">
 <li>写出 MixRow, BitRot 函数，模拟加密过程，为攻击做准备</li>
@@ -296,7 +280,7 @@
 
                     
                 </ul>
-                <p class="copyright text-muted">&copy; 2020 Xiaolin<br></p>
+                <p class="copyright text-muted">&copy; 2020 myzxlin<br></p>
             </div>
         </div>
     </div>
