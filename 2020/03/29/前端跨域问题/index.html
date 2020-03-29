@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="浏览器跨域安全隐患
+
+钓鱼网站利用&amp;lt;iframe&amp;gt;嵌入真正的银行登录页面，当用户使用账号密码登录时， js 读取到表单内容，从而窃取账号密码。
+用户访问钓鱼网站时，js 悄悄发送ajax请求到银行登陆页面，利用浏览器自带的用户coockie完成自动登陆，从返回数据中窃取信息。
+
+同源策略"/>
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="myzxlin"/>
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="前端跨域问题"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="浏览器跨域安全隐患
+
+钓鱼网站利用&amp;lt;iframe&amp;gt;嵌入真正的银行登录页面，当用户使用账号密码登录时， js 读取到表单内容，从而窃取账号密码。
+用户访问钓鱼网站时，js 悄悄发送ajax请求到银行登陆页面，利用浏览器自带的用户coockie完成自动登陆，从返回数据中窃取信息。
+
+同源策略"/>
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="张晓琳"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article"/>
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="myzxlin.github.iohttps://pic.downk.cc/item/5e7dfa7f504f4bcb04845ed5.jpg"/>
+    
+
+        <meta name="twitter:card" content="summary_large_image"/>
+
+    
+
+    
+        <meta name="twitter:image" content="myzxlin.github.iohttps://pic.downk.cc/item/5e7dfa7f504f4bcb04845ed5.jpg"/>
+    
+
+    <!-- Title -->
+    
+    <title>前端跨域问题 - 张晓琳</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">再回首 却闻笑传醉梦中</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                主页
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                日志
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                标签
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('https://pic.downk.cc/item/5e7dfa7f504f4bcb04845ed5.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>前端跨域问题</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2020-03-29
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/前端/">#前端</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="浏览器跨域安全隐患"><a href="#浏览器跨域安全隐患" class="headerlink" title="浏览器跨域安全隐患"></a>浏览器跨域安全隐患</h1><hr>
+<ul>
+<li>钓鱼网站利用<code>&lt;iframe&gt;</code>嵌入真正的银行登录页面，当用户使用账号密码登录时， js 读取到表单内容，从而窃取账号密码。</li>
+<li>用户访问钓鱼网站时，js 悄悄发送ajax请求到银行登陆页面，利用浏览器自带的用户coockie完成自动登陆，从返回数据中窃取信息。<br><br /><br /></li>
+</ul>
+<h1 id="同源策略-Same-Origin-Policy"><a href="#同源策略-Same-Origin-Policy" class="headerlink" title="同源策略 Same Origin Policy"></a>同源策略 Same Origin Policy</h1><hr>
+<p>js只能与同一个域（协议+域名+端口相同）中的页面进行通讯。确保了 Cookie、LocalStorage 和 IndexDB 无法读取，dom对象无法获得，AJAX 请求不能发送。<br>同源策略是浏览器最基本的安全协议，但同时也给一些合法的跨域需求带来阻碍。<br><br /><br /></p>
+<h1 id="跨域的正确打开方式"><a href="#跨域的正确打开方式" class="headerlink" title="跨域的正确打开方式"></a>跨域的正确打开方式</h1><hr>
+<h3 id="1-CORS-跨域资源共享-cross-origin-resource-sharing"><a href="#1-CORS-跨域资源共享-cross-origin-resource-sharing" class="headerlink" title="1. CORS 跨域资源共享 cross-origin resource sharing"></a>1. CORS 跨域资源共享 cross-origin resource sharing</h3><p>允许浏览器向跨域服务器发出请求，克服了ajax只能同源使用的限制。<br>服务端：在 response header 中设置如下字段</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: <span class="string">"http://client.com"</span> <span class="comment">//同意接受该域名下的请求</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-jsonp-跨域"><a href="#2-jsonp-跨域" class="headerlink" title="2. jsonp 跨域"></a>2. jsonp 跨域</h3><p>利用<code>&lt;script&gt;</code>的src属性将资源下载到本地执行，不受浏览器同源策略约束，因此可用于跨域获取资源，缺陷是只能发get请求。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原生js方法-动态创建脚本</span></span><br><span class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.creatElement(<span class="string">'script'</span>); </span><br><span class="line">script.type = <span class="string">"text/javascript"</span>;</span><br><span class="line">script.src = <span class="string">"https://xxx.com/login?callback=func"</span>;</span><br><span class="line"><span class="built_in">document</span>.head.appendChild(script);</span><br><span class="line"></span><br><span class="line"><span class="comment">// jquery-ajax方法</span></span><br><span class="line">$.ajax(&#123;</span><br><span class="line">    url: <span class="string">"https://xxx.com/login"</span>;</span><br><span class="line">    type: <span class="string">'get'</span>,</span><br><span class="line">    dataType: <span class="string">'jsonp'</span>,  </span><br><span class="line">    jsonpCallback: <span class="string">"func"</span>, </span><br><span class="line">    data: &#123;&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 请求成功后执行的回调函数，res为返回数据</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Nginx-代理跨域"><a href="#3-Nginx-代理跨域" class="headerlink" title="3. Nginx 代理跨域"></a>3. Nginx 代理跨域</h3><p>将前端域名发送的请求转发到后端域名上<br>在 nginx.conf 文件中配置，一般是开发环境下这样搞</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen <span class="number">8080</span>; <span class="comment"># 监听前端端口</span></span><br><span class="line">    server_name localhost;  <span class="comment"># 域名是localhost</span></span><br><span class="line">    location ^~ /api &#123;</span><br><span class="line">        proxy_pass http://localhost:<span class="number">8081</span>; <span class="comment"># 转发到服务端域</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-postMessage-跨域"><a href="#4-postMessage-跨域" class="headerlink" title="4. postMessage 跨域"></a>4. postMessage 跨域</h3><p>H5新增的支持跨域的window属性，允许跨窗口通信</p>
+<figure class="highlight javascript"><figcaption><span>client</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe src=<span class="string">"urlServer"</span>/&gt;</span><br><span class="line"> </span><br><span class="line">$(<span class="string">"ifram"</span>).onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.contentWindow.postMessage(clientData,urlServer); <span class="comment">// 发送请求</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 接收server反馈</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e.data);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight javascript"><figcaption><span>server</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 监听message，处理请求</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (e.origin==urlClient)) &#123;                      <span class="comment">// 校验请求源</span></span><br><span class="line">        <span class="built_in">window</span>.postMessage(responseData, urlClient); <span class="comment">// 发送反馈</span></span><br><span class="line">    &#125; </span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-主域相同子域不同：document-domin"><a href="#5-主域相同子域不同：document-domin" class="headerlink" title="5. 主域相同子域不同：document.domin"></a>5. 主域相同子域不同：document.domin</h3><p>两个页面强制设置document.domain为基础主域，就实现了同域</p>
+<figure class="highlight javascript"><figcaption><span>http://www.domin.com/a.html</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe src=<span class="string">"http://child.domain.com/b.html"</span>&gt;&lt;<span class="regexp">/iframe&gt;</span></span><br><span class="line"><span class="regexp">		</span></span><br><span class="line"><span class="regexp">document.domain = 'domain.com';</span></span><br><span class="line"><span class="regexp">var user = 'Tom';</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><figcaption><span>http://child.domin.com/b.html</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.domain = <span class="string">'domain.com'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.parent.user)  <span class="comment">// Tom</span></span><br></pre></td></tr></table></figure>
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/myzxlin" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="mailto:myzxlin@163.com" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2020 myzxlin<br></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
