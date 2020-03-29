@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="func.apply(obj,args) 将函数应用于作用域之外的其他对象，接受数组形式参数func.call(obj,arg1,arg2,...) 类似apply，可接受多个参数func.bind(obj)(args) 更改函数绑定的this到obj上func.bind(obj,args)如果第一"/>
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="myzxlin"/>
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Js中的Apply,Call,Bind"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="func.apply(obj,args) 将函数应用于作用域之外的其他对象，接受数组形式参数func.call(obj,arg1,arg2,...) 类似apply，可接受多个参数func.bind(obj)(args) 更改函数绑定的this到obj上func.bind(obj,args)如果第一"/>
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="张晓琳"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article"/>
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="myzxlin.github.iohttps://pic.downk.cc/item/5e7dfa7f504f4bcb04845ed5.jpg"/>
+    
+
+        <meta name="twitter:card" content="summary_large_image"/>
+
+    
+
+    
+        <meta name="twitter:image" content="myzxlin.github.iohttps://pic.downk.cc/item/5e7dfa7f504f4bcb04845ed5.jpg"/>
+    
+
+    <!-- Title -->
+    
+    <title>Js中的Apply,Call,Bind - 张晓琳</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">再回首 却闻笑传醉梦中</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                主页
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                日志
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                标签
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('https://pic.downk.cc/item/5e7dfa7f504f4bcb04845ed5.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Js中的Apply,Call,Bind</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2020-03-29
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/前端/">#前端</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p><code>func.apply(obj,args)</code> 将函数应用于作用域之外的其他对象，接受数组形式参数<br><code>func.call(obj,arg1,arg2,...)</code> 类似apply，可接受多个参数<br><code>func.bind(obj)(args)</code> 更改函数绑定的this到obj上<br><code>func.bind(obj,args)</code><br>如果第一个参数为null，则this指向全局对象(window)</p>
+<ol>
+<li><p>实现继承</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>)</span>&#123;   </span><br><span class="line">    <span class="keyword">this</span>.name=name;              </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name,school</span>)</span>&#123;   </span><br><span class="line">    Person.apply(<span class="keyword">this</span>,<span class="built_in">arguments</span>);        </span><br><span class="line">    <span class="keyword">this</span>.school=school;      </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不实现继承，只简单调用其他对象的方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> A = &#123;   </span><br><span class="line">    name: <span class="string">'A'</span>,   </span><br><span class="line">    call: <span class="function"><span class="keyword">function</span>(<span class="params">someone</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(name+ <span class="string">' calls '</span> + someone);</span><br><span class="line">    &#125;           </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">var</span> B = &#123;   </span><br><span class="line">   name: <span class="string">'B'</span>      </span><br><span class="line">&#125; </span><br><span class="line">A.call(<span class="string">'C'</span>);         <span class="comment">// A calls C</span></span><br><span class="line">A.call.apply(B,<span class="string">'C'</span>); <span class="comment">// B calls C</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>提高程序性能</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">arr = [<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>];</span><br><span class="line"><span class="built_in">Math</span>.max(<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>);          <span class="comment">// 8</span></span><br><span class="line"><span class="built_in">Math</span>.max(arr);            <span class="comment">// NaN，输入参数不能是数组</span></span><br><span class="line"><span class="built_in">Math</span>.max.apply(<span class="literal">null</span>,arr); <span class="comment">// 8</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现公共方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> call = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'calls '</span> + <span class="keyword">this</span>.name);</span><br><span class="line">&#125;;   </span><br><span class="line"><span class="keyword">var</span> A = &#123; <span class="attr">name</span>: <span class="string">'A'</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> B = &#123; <span class="attr">name</span>: <span class="string">'B'</span> &#125;;</span><br><span class="line"></span><br><span class="line">call.bind(A)();   <span class="comment">// calls A</span></span><br><span class="line">call.bind(B)();   <span class="comment">// calls B</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/myzxlin" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="mailto:myzxlin@163.com" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2020 myzxlin<br></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
