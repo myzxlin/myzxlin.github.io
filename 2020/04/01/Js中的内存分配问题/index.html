@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="内存数据结构
+
+栈：由操作系统自动分配释放 ，存放函数的参数值，局部变量等。js中用来存储基本数据类型，它们占据空间小、大小固定，被频繁使用。number、string、boolean、undefined、null、symbol
+堆：一般由程序员分配释放，生命周期由垃圾回收算法决定。js中用来存储引"/>
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="myzxlin"/>
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Js中的内存分配问题"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="内存数据结构
+
+栈：由操作系统自动分配释放 ，存放函数的参数值，局部变量等。js中用来存储基本数据类型，它们占据空间小、大小固定，被频繁使用。number、string、boolean、undefined、null、symbol
+堆：一般由程序员分配释放，生命周期由垃圾回收算法决定。js中用来存储引"/>
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="张晓琳"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article"/>
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="myzxlin.github.iohttps://pic.downk.cc/item/5e7dfa7f504f4bcb04845ed5.jpg"/>
+    
+
+        <meta name="twitter:card" content="summary_large_image"/>
+
+    
+
+    
+        <meta name="twitter:image" content="myzxlin.github.iohttps://pic.downk.cc/item/5e7dfa7f504f4bcb04845ed5.jpg"/>
+    
+
+    <!-- Title -->
+    
+    <title>Js中的内存分配问题 - 张晓琳</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">再回首 却闻笑传醉梦中</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                homepage
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                tags
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('https://pic.downk.cc/item/5e7dfa7f504f4bcb04845ed5.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Js中的内存分配问题</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2020-04-01
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/前端/">#前端</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="内存数据结构"><a href="#内存数据结构" class="headerlink" title="内存数据结构"></a>内存数据结构</h1><hr>
+<ul>
+<li>栈：由操作系统自动分配释放 ，存放函数的参数值，局部变量等。<br>js中用来存储基本数据类型，它们占据空间小、大小固定，被频繁使用。<br><code>number</code>、<code>string</code>、<code>boolean</code>、<code>undefined</code>、<code>null</code>、<code>symbol</code></li>
+<li>堆：一般由程序员分配释放，生命周期由垃圾回收算法决定。<br>js中用来存储引用数据类型，它们占据空间大、大小不固定。<br><code>object</code>、<code>array</code>、<code>function</code><br><br /><br /></li>
+</ul>
+<h1 id="内存溢出-泄露"><a href="#内存溢出-泄露" class="headerlink" title="内存溢出/泄露"></a>内存溢出/泄露</h1><hr>
+<p>内存溢出：已有的数据超过了其获得到的内存所能存储的范围<br>内存泄露：不再用到的内存没有及时释放，导致占用的内存不能使用或回收。</p>
+<p>如下原因会导致内存泄露：</p>
+<ul>
+<li>全局变量不会被回收</li>
+<li>闭包可以维持函数内局部变量，使其得不到释放</li>
+<li>未清理的DOM元素的引用<br>比如删除DOM时，事件未清除</li>
+<li>被遗忘的计时器</li>
+<li>控制台日志</li>
+<li>循环引用(两个对象相互引用)<br>引用计数机制时会产生此问题，但在标记清除机制中已被解决<br><br /><br /></li>
+</ul>
+<h1 id="垃圾回收机制-GC-Garbage-Collection"><a href="#垃圾回收机制-GC-Garbage-Collection" class="headerlink" title="垃圾回收机制 GC (Garbage Collection)"></a>垃圾回收机制 GC (Garbage Collection)</h1><hr>
+<p>js创建一个对象时，会自动为其分配适当的内存，垃圾回收器定期扫描对象，判断对象是否可以回收，释放他们所指向的内存，防止内存泄漏。有以下两种方式：</p>
+<h3 id="1-引用计数-Reference-Counting-低版本IE"><a href="#1-引用计数-Reference-Counting-低版本IE" class="headerlink" title="1. 引用计数 Reference Counting (低版本IE)"></a>1. 引用计数 Reference Counting (低版本IE)</h3><p>跟踪一个变量的引用次数，当引用次数为0时就将其回收。<br>这种方式不能解决循环引用的问题，容易引起内存泄漏。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 每次调用f(), a b都互相引用，这部分内存永远不会被释放</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = &#123;&#125;, b = &#123;&#125;;</span><br><span class="line">    a.prop = b;</span><br><span class="line">    b.prop = a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-标记清除-Mark-and-Sweep-主流方式"><a href="#2-标记清除-Mark-and-Sweep-主流方式" class="headerlink" title="2. 标记清除 Mark and Sweep (主流方式)"></a>2. 标记清除 Mark and Sweep (主流方式)</h3><p>从全局作用域开始一层层往下标记能引用到的对象，未被标记的对象为不可访问的，被删除。解决了循环引用导致内存泄露的问题。</p>
+<div style="text-align:center">
+<img src="https://pic.downk.cc/item/5e89a15b504f4bcb04e80e6f.png" style="width:50%"></div>
+<br /><br />
+
+<h1 id="V8-引擎"><a href="#V8-引擎" class="headerlink" title="V8 引擎"></a>V8 引擎</h1><hr>
+<p>chrome的js解释器，虽然十分强大，但存在内存溢出的隐患，64位机器只被分配1.4G的内存，在客户端浏览器绰绰有余，但在后端NodeJs上就不够了。</p>
+<p>V8内存空间分为新生代和老生代：</p>
+<h3 id="1-新生代内存空间：存放存活时间较短的对象"><a href="#1-新生代内存空间：存放存活时间较短的对象" class="headerlink" title="1. 新生代内存空间：存放存活时间较短的对象"></a>1. 新生代内存空间：存放存活时间较短的对象</h3><p>Scavenge 算法: from相当于清空区，to相当于安全区</p>
+<div style="text-align:center">
+<img src="https://pic.downk.cc/item/5e89a1d7504f4bcb04e880d1.jpg" style="width:50%"></div>
+
+<h3 id="2-老生代内存空间：存放存活时间较长的对象"><a href="#2-老生代内存空间：存放存活时间较长的对象" class="headerlink" title="2. 老生代内存空间：存放存活时间较长的对象"></a>2. 老生代内存空间：存放存活时间较长的对象</h3><ul>
+<li><p>标记清除GC<br>标记存活对象，未标记的被清除。垃圾回收后内存会出现不连续的情况</p>
+<div style="text-align:center">
+<img src="https://pic.downk.cc/item/5e89a22c504f4bcb04e8c75c.jpg" style="width:50%"></div>
+</li>
+<li><p>标记合并GC<br>将清除后保留下来的对象往堆的另一端移动，解决内存碎片化问题</p>
+<div style="text-align:center">
+<img src="https://pic.downk.cc/item/5e89a22c504f4bcb04e8c75f.jpg" style="width:50%"></div>
+
+</li>
+</ul>
+<h3 id="3-新生代晋升到老生代"><a href="#3-新生代晋升到老生代" class="headerlink" title="3. 新生代晋升到老生代"></a>3. 新生代晋升到老生代</h3><ol>
+<li>新生代垃圾回收中，若对象之前被清理过，那么将其晋升到老生代内存中</li>
+<li>from和to反转过程中，若to使用量超过25%，就将from中对象晋升到老生代 </li>
+</ol>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/myzxlin" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="mailto:myzxlin@163.com" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2020 myzxlin<br></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

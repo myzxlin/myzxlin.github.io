@@ -14,10 +14,11 @@
 
     
         <meta name="description" content="Js单线程
+
 同步模式：程序的执行顺序与任务的排列顺序一致。一次只能完成一件任务，如果有多个任务，就必须排队，前面一个任务完成，后面一个任务才能执行。
 异步模式：程序的执行顺序与任务的排列顺序不一致。前一个任务结束后执行回调函数，后一个任务不等前一个任务结束就执行。
 
-js的执行环境是单线程的，也就是"/>
+js的执行环境是单线程的，也就"/>
     
 
     <!--Author-->
@@ -33,10 +34,11 @@ js的执行环境是单线程的，也就是"/>
     <!--Open Graph Description-->
     
         <meta property="og:description" content="Js单线程
+
 同步模式：程序的执行顺序与任务的排列顺序一致。一次只能完成一件任务，如果有多个任务，就必须排队，前面一个任务完成，后面一个任务才能执行。
 异步模式：程序的执行顺序与任务的排列顺序不一致。前一个任务结束后执行回调函数，后一个任务不等前一个任务结束就执行。
 
-js的执行环境是单线程的，也就是"/>
+js的执行环境是单线程的，也就"/>
     
 
     <!--Open Graph Site Name-->
@@ -201,31 +203,38 @@ js的执行环境是单线程的，也就是"/>
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <h2 id="Js单线程"><a href="#Js单线程" class="headerlink" title="Js单线程"></a>Js单线程</h2><ol>
+                <h2 id="Js单线程"><a href="#Js单线程" class="headerlink" title="Js单线程"></a>Js单线程</h2><hr>
+<ol>
 <li>同步模式：程序的执行顺序与任务的排列顺序一致。一次只能完成一件任务，如果有多个任务，就必须排队，前面一个任务完成，后面一个任务才能执行。</li>
 <li>异步模式：程序的执行顺序与任务的排列顺序不一致。前一个任务结束后执行回调函数，后一个任务不等前一个任务结束就执行。</li>
 </ol>
 <p>js的执行环境是单线程的，也就是同步执行模式，因为只有这样，js才能更好的与浏览器交互。假如js是多线程的，在浏览器中同时操作一个DOM，一个线程要求添加节点，另一个线程要求删除节点，这时浏览器就不知道以哪个线程为准。为了避免此类问题，降低复杂度，js选择只用一个主线程来执行代码，来保证程序执行的一致性。</p>
 <p>js单线程的弊端是，当某个任务耗时长时，后面的任务必须排队等着，常常会出现浏览器无响应等情况。因此，耗时长的操作都应该异步执行，避免浏览器失去响应，最好的例子就是Ajax。 js实现异步有如下方案：</p>
-<h2 id="1-回调函数"><a href="#1-回调函数" class="headerlink" title="1. 回调函数"></a>1. 回调函数</h2><p>函数B作为参数传递到函数A里，A执行完异步操作后再执行B，B是A的回调函数。<br>缺点：高耦合，维护困难，流程混乱，回调地狱，每个任务只能指定一个回调函数。<br>注意：回调并不一定就是异步，回调也可以是同步</p>
+<h2 id="1-回调函数"><a href="#1-回调函数" class="headerlink" title="1. 回调函数"></a>1. 回调函数</h2><hr>
+<p>函数B作为参数传递到函数A里，A执行完异步操作后再执行B，B是A的回调函数。<br>缺点：高耦合，维护困难，流程混乱，回调地狱，每个任务只能指定一个回调函数。<br>注意：回调并不一定就是异步，回调也可以是同步</p>
 <figure class="highlight javascript"><figcaption><span>同步回调</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'A'</span>);</span><br><span class="line">    callback();</span><br><span class="line">&#125;</span><br><span class="line">getInfo(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'B'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><figcaption><span>异步回调</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    $.ajax(</span><br><span class="line">        url: <span class="string">''</span>,</span><br><span class="line">        type: <span class="string">'get'</span>,</span><br><span class="line">        succes: <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">            callback(res);</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line">getInfo(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-事件监听"><a href="#2-事件监听" class="headerlink" title="2. 事件监听"></a>2. 事件监听</h2><p>采用事件驱动模式，任务的执行取决于某个事件是否发生。可绑定多个事件，每个事件可指定多个回调函数。可看作是发布订阅模式的一个简化版本。<br>缺点：整个程序都要变成事件驱动型，运行流程不清晰。</p>
+<p><br/><br/></p>
+<h2 id="2-事件监听"><a href="#2-事件监听" class="headerlink" title="2. 事件监听"></a>2. 事件监听</h2><hr>
+<p>采用事件驱动模式，任务的执行取决于某个事件是否发生。可绑定多个事件，每个事件可指定多个回调函数。可看作是发布订阅模式的一个简化版本。<br>缺点：整个程序都要变成事件驱动型，运行流程不清晰。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f1.addEventListener(<span class="string">'done'</span>,f2); <span class="comment">// 绑定事件,'done'事件一旦被触发便执行f2</span></span><br><span class="line">	</span><br><span class="line"><span class="keyword">var</span> event = <span class="keyword">new</span> Event(<span class="string">'done'</span>);</span><br><span class="line">f1.dispatchEvent();             <span class="comment">// 触发自定义事件(事件广播)</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="3-发布-订阅模式"><a href="#3-发布-订阅模式" class="headerlink" title="3. 发布/订阅模式"></a>3. 发布/订阅模式</h2><p>信号中心发布信号，其他事件订阅信号，订阅者收到信号后开始执行。<br>与事件监听类似，但明显更优。可查看消息中心，了解存在多少信号、每个信号有多少订阅者，从而监控程序运行。</p>
+<p><br/><br/></p>
+<h2 id="3-发布-订阅模式"><a href="#3-发布-订阅模式" class="headerlink" title="3. 发布/订阅模式"></a>3. 发布/订阅模式</h2><hr>
+<p>信号中心发布信号，其他事件订阅信号，订阅者收到信号后开始执行。<br>与事件监听类似，但明显更优。可查看消息中心，了解存在多少信号、每个信号有多少订阅者，从而监控程序运行。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这里使用了一款JQuery插件 </span></span><br><span class="line">jQuery.subscribe(<span class="string">"done"</span>, f2);   <span class="comment">// 订阅,'done'事件一旦发布便执行f2</span></span><br><span class="line">jQuery.unsubscribe(<span class="string">"done"</span>, f2); <span class="comment">// 取消订阅</span></span><br><span class="line"></span><br><span class="line">jQuery.publish(<span class="string">"done"</span>);         <span class="comment">// 发布</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="4-Promise-异步处理（ES6）"><a href="#4-Promise-异步处理（ES6）" class="headerlink" title="4. Promise 异步处理（ES6）"></a>4. Promise 异步处理（ES6）</h2><p>一种异步编程解决方案，相比传统回调函数更加合理和优雅，采用了链式编程，将异步对象和回调函数脱离开来，解决多层回调地狱的问题。</p>
+<p><br/><br/></p>
+<h2 id="4-Promise-异步处理（ES6）"><a href="#4-Promise-异步处理（ES6）" class="headerlink" title="4. Promise 异步处理（ES6）"></a>4. Promise 异步处理（ES6）</h2><hr>
+<p>一种异步编程解决方案，相比传统回调函数更加合理和优雅，采用了链式编程，将异步对象和回调函数脱离开来，解决多层回调地狱的问题。</p>
 <p>promise对象三种状态：<code>pending</code>等待中, <code>fulfilled</code> 和 <code>rejected</code><br>promise构造函数接收两个函数作为参数：<code>resolve</code>，<code>reject</code><br>只有异步操作的结果，可以决定promise对象的状态。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>((resolve, reject) &#123;</span><br><span class="line">    ... resolve(res); <span class="comment">// 异步代码执行成功,执行resolve,promise对象状态从pending变为fulfilled</span></span><br><span class="line">    ... reject(err);  <span class="comment">// 异步代码执行失败,执行reject, promise对象状态从pending变为rejected</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//指定resolve和reject的回调函数</span></span><br><span class="line">p.then(func1)         <span class="comment">// resolve</span></span><br><span class="line"> .catch(func2)        <span class="comment">// reject</span></span><br><span class="line"> .finalluy(func3);    <span class="comment">// 任何状态都执行</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="5-Generator-异步处理-（ES6）"><a href="#5-Generator-异步处理-（ES6）" class="headerlink" title="5. Generator 异步处理 （ES6）"></a>5. Generator 异步处理 （ES6）</h2><p>封装了多个内部状态状态机，通过调用<code>next()</code>方法，使指针移向下一个状态。<br>缺点：必须依靠执行器next()来执行。</p>
+<p><br/><br/></p>
+<h2 id="5-Generator-异步处理-（ES6）"><a href="#5-Generator-异步处理-（ES6）" class="headerlink" title="5. Generator 异步处理 （ES6）"></a>5. Generator 异步处理 （ES6）</h2><hr>
+<p>封装了多个内部状态状态机，通过调用<code>next()</code>方法，使指针移向下一个状态。<br>缺点：必须依靠执行器next()来执行。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> * <span class="title">generator</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> p1;  <span class="comment">// 定义内部不同状态</span></span><br><span class="line">    <span class="keyword">yield</span> p2;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 通过next方法获取每段状态的返回结果</span></span><br><span class="line">ar hw = generator();</span><br><span class="line">hw.next();  <span class="comment">// value:1,        done:false</span></span><br><span class="line">hw.next();  <span class="comment">// value:2,        done:false</span></span><br><span class="line">hw.next();  <span class="comment">// value:0,        done:true</span></span><br><span class="line">hw.next();  <span class="comment">// value:undefine, done:true</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="6-async-generator语法糖（ES7）"><a href="#6-async-generator语法糖（ES7）" class="headerlink" title="6. async: generator语法糖（ES7）"></a>6. async: generator语法糖（ES7）</h2><p>更好的语义，进一步优化promise的链式调用写法，用同步的方式写异步。<br>内置执行器，再也不用next()了，被认为是异步编程的终极解决方案。<br>但async并不会取代promise，底层仍然是promise。</p>
+<p><br/><br/></p>
+<h2 id="6-async-generator语法糖（ES7）"><a href="#6-async-generator语法糖（ES7）" class="headerlink" title="6. async: generator语法糖（ES7）"></a>6. async: generator语法糖（ES7）</h2><hr>
+<p>更好的语义，进一步优化promise的链式调用写法，用同步的方式写异步。<br>内置执行器，再也不用next()了，被认为是异步编程的终极解决方案。<br>但async并不会取代promise，底层仍然是promise。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">p</span> = <span class="title">new</span> <span class="title">Promise</span>(<span class="params"></span>)</span>&#123;...&#125;;</span><br><span class="line">	</span><br><span class="line"><span class="comment">//普通promise写法</span></span><br><span class="line">p().then(<span class="function"><span class="params">v1</span>=&gt;</span>&#123;...&#125;)</span><br><span class="line">   .then(<span class="function"><span class="params">v2</span>=&gt;</span>&#123;...&#125;);</span><br><span class="line">	</span><br><span class="line"><span class="comment">//用async改写</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> v1 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">const</span> v2 = <span class="keyword">await</span> p(v1);</span><br><span class="line">    <span class="keyword">const</span> v3 = <span class="keyword">await</span> p(v2);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'ending'</span>;</span><br><span class="line">&#125;;</span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
 
                 

@@ -211,7 +211,7 @@
 <h1 id="同源策略-Same-Origin-Policy"><a href="#同源策略-Same-Origin-Policy" class="headerlink" title="同源策略 Same Origin Policy"></a>同源策略 Same Origin Policy</h1><hr>
 <p>js只能与同一个域（协议+域名+端口相同）中的页面进行通讯。确保了 Cookie、LocalStorage 和 IndexDB 无法读取，dom对象无法获得，AJAX 请求不能发送。<br>同源策略是浏览器最基本的安全协议，但同时也给一些合法的跨域需求带来阻碍。<br><br /><br /></p>
 <h1 id="跨域的正确打开方式"><a href="#跨域的正确打开方式" class="headerlink" title="跨域的正确打开方式"></a>跨域的正确打开方式</h1><hr>
-<h3 id="1-CORS-跨域资源共享-cross-origin-resource-sharing"><a href="#1-CORS-跨域资源共享-cross-origin-resource-sharing" class="headerlink" title="1. CORS 跨域资源共享 cross-origin resource sharing"></a>1. CORS 跨域资源共享 cross-origin resource sharing</h3><p>这是一个W3C标准，允许浏览器向跨域服务器发出请求，克服了ajax只能同源使用的限制。<br>服务端：在 response header 中设置如下字段</p>
+<h3 id="1-CORS-跨域资源共享-cross-origin-resource-sharing"><a href="#1-CORS-跨域资源共享-cross-origin-resource-sharing" class="headerlink" title="1. CORS 跨域资源共享 cross-origin resource sharing"></a>1. CORS 跨域资源共享 cross-origin resource sharing</h3><p>这是一个W3C标准，允许浏览器向跨域服务器发出请求。<br>服务端：在 response header 中设置如下字段</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: <span class="string">"http://client.com"</span> <span class="comment">//同意接受该域名下的请求</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="2-jsonp-跨域"><a href="#2-jsonp-跨域" class="headerlink" title="2. jsonp 跨域"></a>2. jsonp 跨域</h3><p>利用<code>&lt;script&gt;</code>的src属性将资源下载到本地执行，不受浏览器同源策略约束，因此可用于跨域获取资源，缺陷是只能发get请求。</p>
