@@ -219,7 +219,7 @@
 
 <h2 id="防范措施-1"><a href="#防范措施-1" class="headerlink" title="防范措施"></a>防范措施</h2><ul>
 <li>验证码<br>确保每一次请求用户都是知情的，是最简洁而有效的方法。</li>
-<li>token验证<br>为请求增添攻击者无法伪造的东西，比如token。<br>服务器发给客户端一个token，客户端提交的请求中带着这个token。如果token不合法，服务器则拒绝这个请求。可以把token隐藏在请求的header中。</li>
+<li>token验证<br>为http请求增添攻击者无法伪造的东西，比如token。<br>首先客户端使用用户名与密码请求登录，服务端收到请求，去验证用户名与密码。验证成功后，服务端签发一个token给客户端，客户端将其存储起来，之后每次向服务端请求资源时需带着这个token用来表示身份。服务端收到请求，验证客户端请求里的token是否正确，验证成功就返回请求的数据，否则就视其为攻击者 拒绝这个请求。<br>可以把token隐藏在请求的header中。</li>
 <li>Referer验证<br>请求的header中有一个referer字段，指页面请求来源。<br>通过设置这个字段，使服务器只响应本站的请求；如果不是，就拦截。<br><br/><br/></li>
 </ul>
 <h1 id="分布式拒绝服务-DDOS"><a href="#分布式拒绝服务-DDOS" class="headerlink" title="分布式拒绝服务 DDOS"></a>分布式拒绝服务 DDOS</h1><h1 id="Distributed-Denial-of-Service-Attack"><a href="#Distributed-Denial-of-Service-Attack" class="headerlink" title="Distributed Denial of Service Attack"></a>Distributed Denial of Service Attack</h1><hr>
