@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="跨站脚本攻击 XSSCross Site Scripting在页面中插入恶意脚本，当用户浏览页面时，脚本会自动执行，实现对网站的篡改。
+
+反射型将攻击代码放在url中，用户点击链接后，服务器将代码从url中取出，拼接在html中返回给浏览器，浏览器解析并执行返回的恶意代码。整个过程像一次反射
+存储型"/>
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="myzxlin"/>
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="常见Web攻击类型"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="跨站脚本攻击 XSSCross Site Scripting在页面中插入恶意脚本，当用户浏览页面时，脚本会自动执行，实现对网站的篡改。
+
+反射型将攻击代码放在url中，用户点击链接后，服务器将代码从url中取出，拼接在html中返回给浏览器，浏览器解析并执行返回的恶意代码。整个过程像一次反射
+存储型"/>
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="张晓琳"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article"/>
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="myzxlin.github.iohttps://pic.downk.cc/item/5e7dfa7f504f4bcb04845ed5.jpg"/>
+    
+
+        <meta name="twitter:card" content="summary_large_image"/>
+
+    
+
+    
+        <meta name="twitter:image" content="myzxlin.github.iohttps://pic.downk.cc/item/5e7dfa7f504f4bcb04845ed5.jpg"/>
+    
+
+    <!-- Title -->
+    
+    <title>常见Web攻击类型 - 张晓琳</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">再回首 却闻笑传醉梦中</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                homepage
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                tags
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('https://pic.downk.cc/item/5e7dfa7f504f4bcb04845ed5.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>常见Web攻击类型</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2020-03-27
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/前端/">#前端</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="跨站脚本攻击-XSS"><a href="#跨站脚本攻击-XSS" class="headerlink" title="跨站脚本攻击 XSS"></a>跨站脚本攻击 XSS</h1><h1 id="Cross-Site-Scripting"><a href="#Cross-Site-Scripting" class="headerlink" title="Cross Site Scripting"></a>Cross Site Scripting</h1><p>在页面中插入恶意脚本，当用户浏览页面时，脚本会自动执行，实现对网站的篡改。</p>
+<ul>
+<li><code>反射型</code><br>将攻击代码放在url中，用户点击链接后，服务器将代码从url中取出，拼接在html中返回给浏览器，浏览器解析并执行返回的恶意代码。整个过程像一次反射</li>
+<li><code>存储型</code><br>将恶意代码存储到服务器中，只要用户浏览包含此恶意代码的页面，就会执行。</li>
+<li><code>DOM型</code><br>通过恶意脚本修改页面的 DOM 结构</li>
+</ul>
+<h2 id="防范措施"><a href="#防范措施" class="headerlink" title="防范措施"></a>防范措施</h2><ul>
+<li>CSP 内容安全策略<br>浏览器内置的一种防范XSS的机制。允许开发者创建一些规则，管理网站允许加载的内容，使扩展程序更加安全。<br/><br/></li>
+<li>输入检查<br>对用户的任何输入都要进行检查、过滤、转义，将&lt;script&gt;作为纯文本输出，而不是执行js。 <br/><br/></li>
+</ul>
+<hr>
+<h1 id="跨站请求伪造-CSRF"><a href="#跨站请求伪造-CSRF" class="headerlink" title="跨站请求伪造 CSRF"></a>跨站请求伪造 CSRF</h1><h1 id="Cross-Site-Request-Forgery"><a href="#Cross-Site-Request-Forgery" class="headerlink" title="Cross Site Request Forgery"></a>Cross Site Request Forgery</h1><p>攻击者盗用用户身份发送恶意请求，欺骗用户的浏览器去访问一个用户曾经认证过的网站，并执行恶意操作(如转账)。由于浏览器曾认证过该网站，携带了用户cookie，所以请求会被接收。这是利用网站本身的漏洞</p>
+<div style="text-align:center">
+<img src="https://pic.downk.cc/item/5e8af972504f4bcb04095e2b.jpg" style="width:60%"></div>
+
+<h2 id="防范措施-1"><a href="#防范措施-1" class="headerlink" title="防范措施"></a>防范措施</h2><ul>
+<li>验证码<br>确保每一次请求用户都是知情的，是最简洁而有效的方法。<br/><br/></li>
+<li>token验证<br>为http请求增添攻击者无法伪造的东西，比如token。客户端首次登陆成功后，会收到一个服务端签发的token，客户端将其存储起来，之后每次向服务端请求资源时都带着这个token。服务端收到请求后，验证token是否正确，正确则返回请求的数据，否则就视其为攻击者 拒绝这个请求。<br>可以把token隐藏在请求的header中。<br/><br/></li>
+<li>Referer验证<br>请求的header中有一个referer字段，指页面请求来源。<br>通过设置这个字段，使服务器只响应本站的请求；如果不是，就拦截。<br/><br/></li>
+</ul>
+<hr>
+<h1 id="分布式拒绝服务-DDOS"><a href="#分布式拒绝服务-DDOS" class="headerlink" title="分布式拒绝服务 DDOS"></a>分布式拒绝服务 DDOS</h1><h1 id="Distributed-Denial-of-Service-Attack"><a href="#Distributed-Denial-of-Service-Attack" class="headerlink" title="Distributed Denial of Service Attack"></a>Distributed Denial of Service Attack</h1><p>利用大量分布式服务器(僵尸网络)对目标发起大量请求，耗尽服务器资源，使其无法响应正常访问，造成网站下线。</p>
+<div style="text-align:center">
+<img src="https://pic.downk.cc/item/5e8af54c504f4bcb0406324c.png" style="width:50%"></div>
+
+<ul>
+<li>资源消耗型攻击<br>通过大量请求消耗正常的带宽和协议栈处理资源的能力，使服务器过载并崩溃。</li>
+<li>服务消耗型攻击<br>让服务端始终处理高消耗型业务的忙碌状态，进而无法对正常业务进行响应。</li>
+</ul>
+<h2 id="防范措施-2"><a href="#防范措施-2" class="headerlink" title="防范措施"></a>防范措施</h2><ul>
+<li>备份网站<br>正式服务器一旦崩溃，可以切换到备份网站，通过临时主页展示信息。<br/><br/></li>
+<li>请求拦截<br>拦截恶意请求的IP段，可以架设硬件防火墙，也可以在服务端过滤请求。<br/><br/></li>
+<li>带宽扩容<br>让网站在短时间内急速扩容，顶住大流量的需求<br>1）云服务商的防护产品，用冗余带宽来消化DDOS攻击。<br>2）CDN缓存，将网站静态资源分发到多个服务器，用户就近访问 提高速度。</li>
+</ul>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/myzxlin" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="mailto:myzxlin@163.com" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2020 myzxlin<br></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

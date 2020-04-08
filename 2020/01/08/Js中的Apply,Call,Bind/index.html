@@ -13,11 +13,7 @@
     
 
     
-        <meta name="description" content="跨站脚本攻击 XSSCross Site Scripting
-在页面中插入恶意脚本，当用户浏览页面时，脚本会自动执行，实现对网站的篡改。
-
-反射型将攻击代码放在url中，用户点击链接后，服务器将代码从url中取出，拼接在html中返回给浏览器，浏览器解析并执行返回的恶意代码。整个过程像一次反射
-存储"/>
+        <meta name="description" content="func.apply(obj,args) 将函数应用于作用域之外的其他对象，接受数组形式参数func.call(obj,arg1,arg2,...) 类似apply，可接受多个参数func.bind(obj)(args) 更改函数绑定的this到obj上func.bind(obj,args)如果第一"/>
     
 
     <!--Author-->
@@ -27,16 +23,12 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="常见Web攻击类型"/>
+        <meta property="og:title" content="Js中的Apply,Call,Bind"/>
     
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="跨站脚本攻击 XSSCross Site Scripting
-在页面中插入恶意脚本，当用户浏览页面时，脚本会自动执行，实现对网站的篡改。
-
-反射型将攻击代码放在url中，用户点击链接后，服务器将代码从url中取出，拼接在html中返回给浏览器，浏览器解析并执行返回的恶意代码。整个过程像一次反射
-存储"/>
+        <meta property="og:description" content="func.apply(obj,args) 将函数应用于作用域之外的其他对象，接受数组形式参数func.call(obj,arg1,arg2,...) 类似apply，可接受多个参数func.bind(obj)(args) 更改函数绑定的this到obj上func.bind(obj,args)如果第一"/>
     
 
     <!--Open Graph Site Name-->
@@ -63,7 +55,7 @@
 
     <!-- Title -->
     
-    <title>常见Web攻击类型 - 张晓琳</title>
+    <title>Js中的Apply,Call,Bind - 张晓琳</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -159,13 +151,13 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>常见Web攻击类型</h1>
+                    <h1>Js中的Apply,Call,Bind</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
                         
                         
-                            2020-04-02
+                            2020-01-08
                         
                     </span>
                 </div>
@@ -201,41 +193,20 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <h1 id="跨站脚本攻击-XSS"><a href="#跨站脚本攻击-XSS" class="headerlink" title="跨站脚本攻击 XSS"></a>跨站脚本攻击 XSS</h1><h1 id="Cross-Site-Scripting"><a href="#Cross-Site-Scripting" class="headerlink" title="Cross Site Scripting"></a>Cross Site Scripting</h1><hr>
-<p>在页面中插入恶意脚本，当用户浏览页面时，脚本会自动执行，实现对网站的篡改。</p>
-<ul>
-<li><code>反射型</code><br>将攻击代码放在url中，用户点击链接后，服务器将代码从url中取出，拼接在html中返回给浏览器，浏览器解析并执行返回的恶意代码。整个过程像一次反射</li>
-<li><code>存储型</code><br>将恶意代码存储到服务器中，只要用户浏览包含此恶意代码的页面，就会执行。</li>
-<li><code>DOM型</code><br>通过恶意脚本修改页面的 DOM 结构</li>
-</ul>
-<h2 id="防范措施"><a href="#防范措施" class="headerlink" title="防范措施"></a>防范措施</h2><ul>
-<li>CSP 内容安全策略<br>浏览器内置的一种防范XSS的机制。允许开发者创建一些规则，管理网站允许加载的内容，使扩展程序更加安全。</li>
-<li>输入检查<br>对用户的任何输入都要进行检查、过滤、转义，将&lt;script&gt;作为纯文本输出，而不是执行js。<br><br/><br/></li>
-</ul>
-<h1 id="跨站请求伪造-CSRF"><a href="#跨站请求伪造-CSRF" class="headerlink" title="跨站请求伪造 CSRF"></a>跨站请求伪造 CSRF</h1><h1 id="Cross-Site-Request-Forgery"><a href="#Cross-Site-Request-Forgery" class="headerlink" title="Cross Site Request Forgery"></a>Cross Site Request Forgery</h1><hr>
-<p>攻击者盗用用户身份发送恶意请求，欺骗用户的浏览器去访问一个用户曾经认证过的网站，并执行恶意操作(如转账)。由于浏览器曾认证过该网站，携带了用户cookie，所以请求会被接收。这是利用网站本身的漏洞</p>
-<div style="text-align:center">
-<img src="https://pic.downk.cc/item/5e8af972504f4bcb04095e2b.jpg" style="width:60%"></div>
-
-<h2 id="防范措施-1"><a href="#防范措施-1" class="headerlink" title="防范措施"></a>防范措施</h2><ul>
-<li>验证码<br>确保每一次请求用户都是知情的，是最简洁而有效的方法。</li>
-<li>token验证<br>为http请求增添攻击者无法伪造的东西，比如token。<br>首先客户端使用用户名与密码请求登录，服务端收到请求，去验证用户名与密码。验证成功后，服务端签发一个token给客户端，客户端将其存储起来，之后每次向服务端请求资源时需带着这个token用来表示身份。服务端收到请求，验证客户端请求里的token是否正确，验证成功就返回请求的数据，否则就视其为攻击者 拒绝这个请求。<br>可以把token隐藏在请求的header中。</li>
-<li>Referer验证<br>请求的header中有一个referer字段，指页面请求来源。<br>通过设置这个字段，使服务器只响应本站的请求；如果不是，就拦截。<br><br/><br/></li>
-</ul>
-<h1 id="分布式拒绝服务-DDOS"><a href="#分布式拒绝服务-DDOS" class="headerlink" title="分布式拒绝服务 DDOS"></a>分布式拒绝服务 DDOS</h1><h1 id="Distributed-Denial-of-Service-Attack"><a href="#Distributed-Denial-of-Service-Attack" class="headerlink" title="Distributed Denial of Service Attack"></a>Distributed Denial of Service Attack</h1><hr>
-<p>利用大量分布式服务器(僵尸网络)对目标发起大量请求，耗尽服务器资源，使其无法响应正常访问，造成网站下线。</p>
-<div style="text-align:center">
-<img src="https://pic.downk.cc/item/5e8af54c504f4bcb0406324c.png" style="width:50%"></div>
-
-<ul>
-<li>资源消耗型攻击<br>通过大量请求消耗正常的带宽和协议栈处理资源的能力，使服务器过载并崩溃。</li>
-<li>服务消耗型攻击<br>让服务端始终处理高消耗型业务的忙碌状态，进而无法对正常业务进行响应。</li>
-</ul>
-<h2 id="防范措施-2"><a href="#防范措施-2" class="headerlink" title="防范措施"></a>防范措施</h2><ul>
-<li>备份网站<br>正式服务器一旦崩溃，可以切换到备份网站，通过临时主页展示信息。</li>
-<li>请求拦截<br>拦截恶意请求的IP段，可以架设硬件防火墙，也可以在服务端过滤请求。</li>
-<li>带宽扩容<br>让网站在短时间内急速扩容，顶住大流量的需求<br>1）云服务商的防护产品，用冗余带宽来消化DDOS攻击。<br>2）CDN缓存，将网站静态资源分发到多个服务器，用户就近访问 提高速度。</li>
-</ul>
+                <p><code>func.apply(obj,args)</code> 将函数应用于作用域之外的其他对象，接受数组形式参数<br><code>func.call(obj,arg1,arg2,...)</code> 类似apply，可接受多个参数<br><code>func.bind(obj)(args)</code> 更改函数绑定的this到obj上<br><code>func.bind(obj,args)</code><br>如果第一个参数为null，则this指向全局对象(window)</p>
+<ol>
+<li><p>实现继承</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>)</span>&#123;   </span><br><span class="line">    <span class="keyword">this</span>.name=name;              </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name,school</span>)</span>&#123;   </span><br><span class="line">    Person.apply(<span class="keyword">this</span>,<span class="built_in">arguments</span>);        </span><br><span class="line">    <span class="keyword">this</span>.school=school;      </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不实现继承，只简单调用其他对象的方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> A = &#123;   </span><br><span class="line">    name: <span class="string">'A'</span>,   </span><br><span class="line">    call: <span class="function"><span class="keyword">function</span>(<span class="params">someone</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(name+ <span class="string">' calls '</span> + someone);</span><br><span class="line">    &#125;           </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">var</span> B = &#123;   </span><br><span class="line">   name: <span class="string">'B'</span>      </span><br><span class="line">&#125; </span><br><span class="line">A.call(<span class="string">'C'</span>);         <span class="comment">// A calls C</span></span><br><span class="line">A.call.apply(B,<span class="string">'C'</span>); <span class="comment">// B calls C</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>提高程序性能</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">arr = [<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>];</span><br><span class="line"><span class="built_in">Math</span>.max(<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>);          <span class="comment">// 8</span></span><br><span class="line"><span class="built_in">Math</span>.max(arr);            <span class="comment">// NaN，输入参数不能是数组</span></span><br><span class="line"><span class="built_in">Math</span>.max.apply(<span class="literal">null</span>,arr); <span class="comment">// 8</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现公共方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> call = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'calls '</span> + <span class="keyword">this</span>.name);</span><br><span class="line">&#125;;   </span><br><span class="line"><span class="keyword">var</span> A = &#123; <span class="attr">name</span>: <span class="string">'A'</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> B = &#123; <span class="attr">name</span>: <span class="string">'B'</span> &#125;;</span><br><span class="line"></span><br><span class="line">call.bind(A)();   <span class="comment">// calls A</span></span><br><span class="line">call.bind(B)();   <span class="comment">// calls B</span></span><br></pre></td></tr></table></figure></li>
+</ol>
 
 
                 

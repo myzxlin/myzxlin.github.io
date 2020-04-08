@@ -15,10 +15,10 @@
     
         <meta name="description" content="浏览器跨域安全隐患
 
-钓鱼网站利用&amp;lt;iframe&amp;gt;嵌入真正的银行登录页面，当用户使用账号密码登录时， js 读取到表单内容，从而窃取账号密码。
-用户访问钓鱼网站时，js 悄悄发送ajax请求到银行登陆页面，利用浏览器自带的用户coockie完成自动登陆，从返回数据中窃取信息。
+黑客利用&amp;lt;iframe&amp;gt;嵌入真正的银行登录页面，当用户使用账号密码登录时， js 读取到表单内容，从而窃取账号密码。
+用户访问恶意网站时，js 悄悄发送ajax请求到银行登陆页面，利用浏览器自带的用户coockie完成自动登陆，从返回数据中窃取信息。
 
-同源策略"/>
+同源策略 S"/>
     
 
     <!--Author-->
@@ -28,17 +28,17 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="前端跨域问题"/>
+        <meta property="og:title" content="前端跨域方案"/>
     
 
     <!--Open Graph Description-->
     
         <meta property="og:description" content="浏览器跨域安全隐患
 
-钓鱼网站利用&amp;lt;iframe&amp;gt;嵌入真正的银行登录页面，当用户使用账号密码登录时， js 读取到表单内容，从而窃取账号密码。
-用户访问钓鱼网站时，js 悄悄发送ajax请求到银行登陆页面，利用浏览器自带的用户coockie完成自动登陆，从返回数据中窃取信息。
+黑客利用&amp;lt;iframe&amp;gt;嵌入真正的银行登录页面，当用户使用账号密码登录时， js 读取到表单内容，从而窃取账号密码。
+用户访问恶意网站时，js 悄悄发送ajax请求到银行登陆页面，利用浏览器自带的用户coockie完成自动登陆，从返回数据中窃取信息。
 
-同源策略"/>
+同源策略 S"/>
     
 
     <!--Open Graph Site Name-->
@@ -65,7 +65,7 @@
 
     <!-- Title -->
     
-    <title>前端跨域问题 - 张晓琳</title>
+    <title>前端跨域方案 - 张晓琳</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -161,13 +161,13 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>前端跨域问题</h1>
+                    <h1>前端跨域方案</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
                         
                         
-                            2020-03-05
+                            2020-02-14
                         
                     </span>
                 </div>
@@ -205,13 +205,13 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <h1 id="浏览器跨域安全隐患"><a href="#浏览器跨域安全隐患" class="headerlink" title="浏览器跨域安全隐患"></a>浏览器跨域安全隐患</h1><hr>
 <ul>
-<li>钓鱼网站利用<code>&lt;iframe&gt;</code>嵌入真正的银行登录页面，当用户使用账号密码登录时， js 读取到表单内容，从而窃取账号密码。</li>
-<li>用户访问钓鱼网站时，js 悄悄发送ajax请求到银行登陆页面，利用浏览器自带的用户coockie完成自动登陆，从返回数据中窃取信息。<br><br /><br /></li>
+<li>黑客利用<code>&lt;iframe&gt;</code>嵌入真正的银行登录页面，当用户使用账号密码登录时， js 读取到表单内容，从而窃取账号密码。</li>
+<li>用户访问恶意网站时，js 悄悄发送ajax请求到银行登陆页面，利用浏览器自带的用户coockie完成自动登陆，从返回数据中窃取信息。<br><br /><br /></li>
 </ul>
 <h1 id="同源策略-Same-Origin-Policy"><a href="#同源策略-Same-Origin-Policy" class="headerlink" title="同源策略 Same Origin Policy"></a>同源策略 Same Origin Policy</h1><hr>
 <p>js只能与同一个域（协议+域名+端口相同）中的页面进行通讯。确保了 Cookie、LocalStorage 和 IndexDB 无法读取，dom对象无法获得，AJAX 请求不能发送。<br>同源策略是浏览器最基本的安全协议，但同时也给一些合法的跨域需求带来阻碍。<br><br /><br /></p>
 <h1 id="跨域的正确打开方式"><a href="#跨域的正确打开方式" class="headerlink" title="跨域的正确打开方式"></a>跨域的正确打开方式</h1><hr>
-<h3 id="1-CORS-跨域资源共享-cross-origin-resource-sharing"><a href="#1-CORS-跨域资源共享-cross-origin-resource-sharing" class="headerlink" title="1. CORS 跨域资源共享 cross-origin resource sharing"></a>1. CORS 跨域资源共享 cross-origin resource sharing</h3><p>这是一个W3C标准，允许浏览器向跨域服务器发出请求。<br>服务端：在 response header 中设置如下字段</p>
+<h3 id="1-CORS-跨域资源共享-cross-origin-resource-sharing"><a href="#1-CORS-跨域资源共享-cross-origin-resource-sharing" class="headerlink" title="1. CORS 跨域资源共享 cross-origin resource sharing"></a>1. CORS 跨域资源共享 cross-origin resource sharing</h3><p>这是一个W3C标准，允许浏览器向服务器发出跨域请求。目前主流浏览器都支持CORS，对于简单请求，浏览器会直接发送CORS请求（在header中加入origin字段）。因此只需要设置服务端即可，在 response header 中设置如下字段：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: <span class="string">"http://client.com"</span> <span class="comment">//同意接受该域名下的请求</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="2-jsonp-跨域"><a href="#2-jsonp-跨域" class="headerlink" title="2. jsonp 跨域"></a>2. jsonp 跨域</h3><p>利用<code>&lt;script&gt;</code>的src属性将资源下载到本地执行，不受浏览器同源策略约束，因此可用于跨域获取资源，缺陷是只能发get请求。</p>
