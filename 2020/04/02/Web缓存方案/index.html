@@ -13,9 +13,10 @@
     
 
     
-        <meta name="description" content="Redis数据库与业务服务器之间增设一个redis缓存服务器，客户端第一次请求的数据从数据库拿出后放到redis中，数据不过期或不更改的前提下，下次请求直接从redis中拿数据，缓解数据库压力。
-
-内容分发网络 (CDN)Content Delivery Network数据缓存在各地的边缘服务器，通"/>
+        <meta name="description" content="Redis
+数据库与业务服务器之间增设一个redis缓存服务器，客户端第一次请求的数据从数据库拿出后放到redis中，数据不过期或不更改的前提下，下次请求直接从redis中拿数据，缓解数据库压力。
+内容分发网络 (CDN)Content Delivery Network
+数据缓存在各地的边缘服务器，"/>
     
 
     <!--Author-->
@@ -30,9 +31,10 @@
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="Redis数据库与业务服务器之间增设一个redis缓存服务器，客户端第一次请求的数据从数据库拿出后放到redis中，数据不过期或不更改的前提下，下次请求直接从redis中拿数据，缓解数据库压力。
-
-内容分发网络 (CDN)Content Delivery Network数据缓存在各地的边缘服务器，通"/>
+        <meta property="og:description" content="Redis
+数据库与业务服务器之间增设一个redis缓存服务器，客户端第一次请求的数据从数据库拿出后放到redis中，数据不过期或不更改的前提下，下次请求直接从redis中拿数据，缓解数据库压力。
+内容分发网络 (CDN)Content Delivery Network
+数据缓存在各地的边缘服务器，"/>
     
 
     <!--Open Graph Site Name-->
@@ -197,14 +199,14 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <img src="https://pic.downk.cc/item/5e8ddabd504f4bcb045fc59f.jpg">
+                <img src="https://pic.downk.cc/item/5e967838c2a9a83be55c43e5.jpg">
 
-<h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><p>数据库与业务服务器之间增设一个redis缓存服务器，客户端第一次请求的数据从数据库拿出后放到redis中，数据不过期或不更改的前提下，下次请求直接从redis中拿数据，缓解数据库压力。</p>
-<hr>
-<h1 id="内容分发网络-CDN"><a href="#内容分发网络-CDN" class="headerlink" title="内容分发网络 (CDN)"></a>内容分发网络 (CDN)</h1><h1 id="Content-Delivery-Network"><a href="#Content-Delivery-Network" class="headerlink" title="Content Delivery Network"></a>Content Delivery Network</h1><p>数据缓存在各地的边缘服务器，通过中心平台的负载均衡、内容分发与调度，使用户就近获取所需内容，降低网络拥塞。</p>
-<hr>
-<p><br/><br/></p>
-<h1 id="Http缓存"><a href="#Http缓存" class="headerlink" title="Http缓存"></a>Http缓存</h1><div style="text-align:center;">
+<h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><hr>
+<p>数据库与业务服务器之间增设一个redis缓存服务器，客户端第一次请求的数据从数据库拿出后放到redis中，数据不过期或不更改的前提下，下次请求直接从redis中拿数据，缓解数据库压力。<br><br/><br/></p>
+<h1 id="内容分发网络-CDN"><a href="#内容分发网络-CDN" class="headerlink" title="内容分发网络 (CDN)"></a>内容分发网络 (CDN)</h1><h1 id="Content-Delivery-Network"><a href="#Content-Delivery-Network" class="headerlink" title="Content Delivery Network"></a>Content Delivery Network</h1><hr>
+<p>数据缓存在各地的边缘服务器，通过中心平台的负载均衡、内容分发与调度，使用户就近获取所需内容，降低网络拥塞。<br><br/><br/></p>
+<h1 id="Http缓存"><a href="#Http缓存" class="headerlink" title="Http缓存"></a>Http缓存</h1><hr>
+<div style="text-align:center;">
 <img src="https://pic.downk.cc/item/5e8ddb79504f4bcb04606a84.jpg" style="width:80%;margin:20px"></div>
 
 <h3 id="强缓存：不与服务器通信，直接使用本地资源"><a href="#强缓存：不与服务器通信，直接使用本地资源" class="headerlink" title="强缓存：不与服务器通信，直接使用本地资源"></a>强缓存：不与服务器通信，直接使用本地资源</h3><ul>
@@ -216,13 +218,27 @@
 <li>根据<code>Last-Modified</code>/<code>If-Modified-Since</code><br>浏览器首次请求资源时，服务器返回 Last-Modified (资源最后修改时间)。浏览器再次请求该资源时，header中包含 If-Modified-Since，值为之前返回的 Last-Modified。服务器根据这个值判断是否命中缓存。<br>这种方法不太准确，资源变化了最后修改时间也可以一致。</li>
 <li>根据<code>Etag</code>/<code>If-None-Match</code><br>Etag = H(资源编号, 资源最后修改时间, 资源大小)<br>H：抗碰撞散列哈希，重复的概率非常小<br>ETag 能够更加精准的控制缓存，保证每个资源是唯一的，资源的任何变化都会导致ETag变化。服务器根据浏览器发送的 If-None-Match 判断是否命中缓存。</li>
 </ul>
-<p>两种方案可同时启用，同时启用时 ETag 优先级更高</p>
-<hr>
-<h1 id="APP-Cache"><a href="#APP-Cache" class="headerlink" title="APP Cache"></a>APP Cache</h1><p>H5新增机制，通过manifest文件实现缓存，此法已废弃</p>
+<p>两种方案可同时启用，同时启用时 ETag 优先级更高<br><br/><br/></p>
+<h1 id="IndexedDB"><a href="#IndexedDB" class="headerlink" title="IndexedDB"></a>IndexedDB</h1><hr>
+<p>浏览器提供的本地数据库，允许存储大量数据、建立索引，可以被js创建和操作。<br>它有如下特点：</p>
+<ol>
+<li>不属于关系型数据库，不支持SQL查询语句</li>
+<li>数据以”键值对”的形式保存，每条数据记录都有对应的主键</li>
+<li>异步</li>
+<li>支持事务</li>
+<li>同源限制</li>
+<li>储存空间 &gt; 250MB</li>
+<li>支持二进制储存 (ArrayBuffer, Blob)</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> db;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打开或创建数据库</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">open</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> request = <span class="built_in">window</span>.indexedDB.open(name, version);</span><br><span class="line"></span><br><span class="line">    request.onsuccess = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">        db = request.result;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"打开成功"</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    request.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"打开失败"</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新建表[person]</span></span><br><span class="line"><span class="keyword">var</span> store = db.createObjectStore(<span class="string">'person'</span>, &#123; <span class="attr">keyPath</span>: <span class="string">'id'</span> &#125;);</span><br><span class="line"><span class="comment">// 添加索引</span></span><br><span class="line">store.createIndex(<span class="string">'name'</span>, <span class="string">'name'</span>, &#123; <span class="attr">unique</span>: <span class="literal">false</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新增数据</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> request = db.transaction([<span class="string">'person'</span>], <span class="string">'readwrite'</span>)</span><br><span class="line">        .objectStore(<span class="string">'person'</span>)</span><br><span class="line">        .add(&#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">name</span>: <span class="string">'段誉'</span>&#125;);</span><br><span class="line"></span><br><span class="line">    request.onsuccess = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'数据写入成功'</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    request.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'数据写入失败'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br/><br/></p>
+<h1 id="APP-Cache"><a href="#APP-Cache" class="headerlink" title="APP Cache"></a>APP Cache</h1><hr>
+<p>H5新增机制，通过manifest文件实现缓存，此法已废弃</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">manifest</span>=<span class="string">"index.appcache"</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义缓存清单 index.appache</span></span><br><span class="line">CACHE:</span><br><span class="line">index.html</span><br><span class="line">script.js</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="Service-Worker-SW"><a href="#Service-Worker-SW" class="headerlink" title="Service Worker (SW)"></a>Service Worker (SW)</h1><p>是APP Cache的替代方案，在<code>web Worker</code>的基础上增加了离线缓存的能力。<br>它作为一个独立的线程来运作，可以拦截处理页面的所有网络请求(fetch)，访问cache和indexDB，支持服务端推送，让开发者自己管理缓存的版本。</p>
+<p><br/><br/></p>
+<h1 id="Service-Worker-SW"><a href="#Service-Worker-SW" class="headerlink" title="Service Worker (SW)"></a>Service Worker (SW)</h1><hr>
+<p>是APP Cache的替代方案，在<code>web Worker</code>的基础上增加了离线缓存的能力。<br>它作为一个独立的线程来运作，可以拦截处理页面的所有网络请求(fetch)，访问cache和indexDB，支持服务端推送，让开发者自己管理缓存的版本。</p>
 
 
                 
