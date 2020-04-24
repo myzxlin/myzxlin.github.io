@@ -21,7 +21,7 @@ var colorMap = {
 var fontSize = { // 键值表示位数
     1: '2em',
     2: '2em',
-    3: '1.5em',
+    3: '1.6em',
     4: '1.3em',
     5: '1.1em'
 }
@@ -134,35 +134,25 @@ function move(direction) {
     generate();
 }
 
-// 棋盘生成新元素
+// 棋盘生成随机新元素
 function generate() {
     // 生成0-3之间的随机整数
     let randInt4 = () => {
         return Math.floor(Math.random()*4)
     }
-    let maxNum = Math.random()>0.5 ? 2 : 1;
-    // 随机生成maxNum个数, 值为2或4
-    for (let t=0; t<maxNum; t++) {
-        let val = Math.random()>0.5 ? 4 : 2;
-        // 随机生成坐标
-        let x = randInt4();
-        let y = randInt4();
-        while (map[x][y]!=0) {
-            x = randInt4();
-            y = randInt4();
-        }
-        map[x][y] = val;
-        // 填充进棋盘的空位处
-        board.childNodes[x*4+y].innerText = val;
-        board.childNodes[x*4+y].style.backgroundColor = colorMap[val];
-        board.childNodes[x*4+y].style.fontSize = fontSize[String(val).length];
-        // 若棋盘只剩一个空位，则只填入一个数
-        let isFull = true;
-        for (let i=0; i<4 && isFull; i++)
-            for (let j=0; j<4 && isFull; j++)
-                if (map[i][j]==0) isFull = false;
-        if (t==0 && isFull) break;
+    let val = Math.random()>0.5 ? 4 : 2;
+    // 随机生成坐标
+    let x = randInt4();
+    let y = randInt4();
+    while (map[x][y]!=0) {
+        x = randInt4();
+        y = randInt4();
     }
+    map[x][y] = val;
+    // 填充进棋盘的空位处
+    board.childNodes[x*4+y].innerText = val;
+    board.childNodes[x*4+y].style.backgroundColor = colorMap[val];
+    board.childNodes[x*4+y].style.fontSize = fontSize[String(val).length];
 }
 
 // 监听键盘上下左右事件
