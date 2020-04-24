@@ -169,7 +169,7 @@ function generate() {
 document.onkeydown = function(event) {
     event.preventDefault();
     if (event.key == 'ArrowRight') move('right');
-    if (event.key == 'ArrowRLeft') move('left');
+    if (event.key == 'ArrowLeft') move('left');
     if (event.key == 'ArrowDown') move('down');
     if (event.key == 'ArrowUp') move('up');
 }
